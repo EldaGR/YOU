@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carta pa ti💌</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .envelope {
+      width: 200px;
+      height: 130px;
+      background: #f87171;
+      position: relative;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .envelope:hover {
+      transform: scale(1.05);
+    }
+
+    .flap {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-left: 100px solid transparent;
+      border-right: 100px solid transparent;
+      border-bottom: 65px solid #ef4444;
+      border-radius: 8px 8px 0 0;
+      transition: all 0.5s ease;
+      z-index: 2;
+    }
+
+    .envelope.open .flap {
+      transform: rotateX(180deg);
+      opacity: 0;
+    }
+
+    .letter-hidden {
+      display: none;
+    }
+
+    .typewriter {
+      display: inline-block;
+      border-right: 2px solid #f87171;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 2s steps(40, end), blink 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-pink-100 to-pink-300 min-h-screen flex flex-col items-center justify-center p-4">
+
+  <!-- Sobre -->
+  <div id="envelope" class="envelope relative mb-4 flex items-center justify-center">
+    <div class="flap"></div>
+    <span class="text-white z-10 text-2xl font-bold">💌</span>
+  </div>
+
+  <p class="text-gray-700 italic text-center mb-6">Haz clic en el sobre para abrir tu carta</p>
+
+  <!-- Carta oculta -->
+  <div id="loveLetter" class="letter-hidden max-w-xl bg-white bg-opacity-90 p-8 rounded-2xl shadow-2xl text-center">
+    <h1 class="text-4xl font-bold text-pink-600 mb-4">Pa ti ojitos lindos 💖</h1>
+
+    <!-- Frases que van apareciendo -->
+    <p id="frase1" class="text-lg text-gray-700 leading-relaxed mb-4 hidden">
+      Hoy solo venía a decirte que...
+    </p>
+    <p id="frase2" class="text-lg text-gray-700 leading-relaxed mb-4 hidden">
+      <span class="typewriter">"Más que ser el café que te despierte,<br>me gustaría ser los cinco minutos más de sueño que quieres."</span>
+    </p>
+    <p id="frase3" class="text-lg text-gray-700 leading-relaxed mb-4 hidden">
+      Porque contigo, hasta los silencios son bonitos 💫
+    </p>
+    <p id="frase4" class="text-lg text-gray-700 leading-relaxed mb-6 hidden">
+      Gracias por existir, por ser tú, y por estar en mi vida.
+    </p>
+
+    <p class="text-xl text-pink-500 font-semibold mb-6 hidden" id="firma">TQ 💌</p>
+    <p class="text-gray-600 italic hidden" id="firma2">Con todo mi corazón,<br>Tu persona, yop JAJA 🥰</p>
+  </div>
+
+  <!-- Script -->
+  <script>
+    const envelope = document.getElementById('envelope');
+    const letter = document.getElementById('loveLetter');
+
+    envelope.addEventListener('click', () => {
+      envelope.classList.add('open');
+      setTimeout(() => {
+        letter.classList.remove('letter-hidden');
+        // Mostrar frases poco a poco
+        setTimeout(() => document.getElementById('frase1').classList.remove('hidden'), 300);
+        setTimeout(() => document.getElementById('frase2').classList.remove('hidden'), 1500);
+        setTimeout(() => document.getElementById('frase3').classList.remove('hidden'), 4000);
+        setTimeout(() => document.getElementById('frase4').classList.remove('hidden'), 6000);
+        setTimeout(() => document.getElementById('firma').classList.remove('hidden'), 7500);
+        setTimeout(() => document.getElementById('firma2').classList.remove('hidden'), 8500);
+
+        envelope.style.display = 'none';
+      }, 500);
+    });
+  </script>
+</body>
+</html>
